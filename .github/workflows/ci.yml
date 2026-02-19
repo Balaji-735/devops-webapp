@@ -18,3 +18,10 @@ jobs:
 
       - name: Build Step
         run: echo "Build Successful 🚀"
+
+      - name: Notify Slack
+        if: always()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"GitHub Action Build Completed 🚀"}' \
+          ${{ secrets.SLACK_WEBHOOK }}
